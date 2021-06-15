@@ -60,3 +60,23 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development do
+  gem 'pry-byebug'
+  gem 'pry-rails'
+end
+
+def index
+  byebug
+  @blogs = Blog.search(params).order(created_at: :desc)
+end
+def index
+  binding.pry
+  @blogs = Blog.search(params).order(created_at: :desc)
+end
+gem 'annotate'
+gem 'rails-i18n'
+
+source 'https://rubygems.org'
+
+gem 'bcrypt',  '3.1.12'

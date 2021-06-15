@@ -1,0 +1,21 @@
+ja:
+
+  Show: 記事を見る
+  Search: 検索
+  Edit: 記事の編集
+  Destroy: 削除
+  Back: 一覧へ戻る
+  New Blog: 記事の作成
+  activerecord:
+    models:
+      blog: 記事
+    attributes:
+      blog:
+        title: タイトル
+        body: 本文
+      comment:
+        body: コメント本文
+  labels:
+    comment_submit: コメント投稿
+  
+  

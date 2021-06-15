@@ -1,0 +1,10 @@
+
+
+
+<h1>記事一覧</h1>
+<% if logged_in? %>
+  <%= render 'blogs/logged_in' %>
+<% else %>
+  <%= render 'blogs/not_logged_in' %>
+<% end %>
+

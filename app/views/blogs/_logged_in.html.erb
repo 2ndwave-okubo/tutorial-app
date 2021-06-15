@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_with(path: :blogs_path, local: true, method: :get) do |form| %>
+  <label for="search_title"><%= t('activerecord.attributes.blog.title') %></label><%= form.text_field :search_title, value: params[:search_title] %>
+  <%= submit_tag t('Search'), name: nil %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @blogs.each do |blog| %>
+      <tr>
+      <!-- 作成日を追加 -->
+      <td><%= blog.created_at.strftime("%Y/%m/%d") %></td>
+      <!-- タイトルを追加 -->
+      <td><%= blog.title %></td>
+        <td><%= link_to t('Show'), blog %></td>
+        <td><%= link_to t('Edit'), edit_blog_path(blog) %></td>
+        <td><%= link_to t('Destroy'), blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+
+
+<%= link_to t('New Blog'), new_blog_path %>
+<%= link_to "ログアウト", logout_path, method: :delete %>

@@ -1,0 +1,6 @@
+document.getElementById('comments_area').innerHTML = "<%= j(render 'index', { comments: @comment.blog.comments }) %>";
+<% if @comment.valid? %>
+  document.getElementById('comment_form').innerHTML = "<%= j(render partial: "comments/form", locals: { comment: @comment.blog.comments.build }) %>";
+<% else %>
+  document.getElementById('comment_form').innerHTML = "<%= j(render partial: "comments/form", locals: { comment: @comment }) %>";
+<% end %>

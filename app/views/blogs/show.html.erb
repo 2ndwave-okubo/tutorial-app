@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+    <!-- h1タグでタイトルを表示 -->
+    <h1><%= @blog.title %></h1>
+
+    <!-- 本文を表示 -->
+    <%= simple_format(@blog.body) %>
+    
+    <%= tag.div id: :comments_area do %>
+    <%= render partial: "comments/index", locals: { comments: @blog.comments } %>
+
+
+   
+<% end %>
+
+<%= tag.div id: :comment_form do %>
+    <%= render partial: "comments/form", locals: { comment: @blog.comments.build } %>
+<% end %>
+<div class="blog_user_name">
+  <%= link_to(@user.name, "/users/#{@user.id}") %>
+</div>
+<%= link_to t('Edit'), edit_blog_path(@blog) %> |
+<%= link_to t('Back'), blogs_path %>
