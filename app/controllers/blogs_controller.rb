@@ -9,8 +9,8 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1 or /blogs/1.json
   def show
-    @post=Blog.find_by(id: params[:id])
-    @user=User.find_by(id: @blog.user_id)
+    @post=Blog.find_by(id: params[:user_id])
+    @user=User.find_by(id: @blog._id)
     
   end
 
@@ -27,9 +27,7 @@ class BlogsController < ApplicationController
   def create
 
     @blog = Blog.new(blog_params,
-    content: params[:content],
-    user_id: @current_user&.id)
-
+    user_id: @current_user.id)
     
     respond_to do |format|
       if @blog.save
@@ -90,7 +88,6 @@ class BlogsController < ApplicationController
     end
 
     
-  
     
     
 

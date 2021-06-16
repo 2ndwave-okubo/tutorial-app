@@ -15,8 +15,6 @@
 <%= tag.div id: :comment_form do %>
     <%= render partial: "comments/form", locals: { comment: @blog.comments.build } %>
 <% end %>
-<div class="blog_user_name">
-  <%= link_to(@user.name, "/users/#{@user.id}") %>
-</div>
+<%= link_to(@user.name,"users/#{@user.id}") %>
 <%= link_to t('Edit'), edit_blog_path(@blog) %> |
 <%= link_to t('Back'), blogs_path %>

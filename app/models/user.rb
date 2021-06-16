@@ -6,10 +6,11 @@
 #  email           :string(255)
 #  name            :string(255)
 #  password_digest :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
 #  user_id         :integer
 #
 class User < ApplicationRecord
     has_secure_password
+    def blogs
+        return Post.where(user_id: self.id)
+    end
 end
