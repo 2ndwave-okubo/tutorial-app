@@ -1,17 +1,21 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy ]
   before_action :logged_in_user, only:[:edit, :update, :destroy]
+  
+  impressionist :actions=> [:show]
+
 
   # GET /blogs or /blogs.json
   def index
     @blogs = Blog.all
+    @blogs = Blog.search(params).order(created_at: :desc)
+    @most_viewed = Blog.order('impressions_count DESC').take(3)
+    @all_ranks = Blog.find(Like.group(:blog_id).order('count(blog_id) desc').limit(3).pluck(:blog_id))
   end
 
   # GET /blogs/1 or /blogs/1.json
   def show
-    @post=Blog.find_by(id: params[:user_id])
-    @user=User.find_by(id: @blog._id)
-    
+    @like = Like.new
   end
 
   # GET /blogs/new
@@ -21,14 +25,16 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    
   end
 
   # POST /blogs or /blogs.json
   def create
 
-    @blog = Blog.new(blog_params,
-    user_id: @current_user.id)
+    @blog = Blog.new(blog_params)
+    @blog.user_id = current_user.id
     
+  
     respond_to do |format|
       if @blog.save
         
@@ -72,9 +78,7 @@ class BlogsController < ApplicationController
     end
   end
 
-  def index
-    @blogs = Blog.search(params).order(created_at: :desc)
-  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -82,10 +86,7 @@ class BlogsController < ApplicationController
       @blog = Blog.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def blog_params
-      params.fetch(:blog, {}).permit(:title, :body)
-    end
+    
 
     
     

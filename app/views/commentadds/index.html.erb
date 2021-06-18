@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Commentadds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commentadds.each do |commentadd| %>
+      <tr>
+        <td><%= commentadd.user_id %></td>
+        <td><%= link_to 'Show', commentadd %></td>
+        <td><%= link_to 'Edit', edit_commentadd_path(commentadd) %></td>
+        <td><%= link_to 'Destroy', commentadd, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Commentadd', new_commentadd_path %>

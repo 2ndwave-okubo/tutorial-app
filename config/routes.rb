@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :commentadds
   resources :blogs
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :comments
@@ -8,4 +9,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   
+  resources :blogs do
+    post :confirm,action: :confirm_new, on: :new
+    resources :likes, only: [:create, :destroy]
+    
+  end
 end

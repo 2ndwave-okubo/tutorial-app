@@ -1,0 +1,15 @@
+# == Schema Information
+#
+# Table name: commentadds
+#
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+
+one:
+  user_id: 1
+
+two:
+  user_id: 1

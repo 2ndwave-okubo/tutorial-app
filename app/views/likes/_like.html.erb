@@ -1,0 +1,9 @@
+<% if blog.liked_by?(current_user) %>
+   <%= link_to(blog_add_path(post), method: :delete, remote: true, id: :"like-button-#{blog.id}") do %>
+       <i class="fa-lg fas fa-heart icon-btn liked"></i>
+   <% end %>
+<% else %>
+   <%= link_to(blog_add_path(post), method: :blog, remote: true, id: :"like-button-#{blog.id}") do %>
+       <i class="fa-lg fas fa-heart icon-btn not-like"></i>
+   <% end %>
+<% end %>
