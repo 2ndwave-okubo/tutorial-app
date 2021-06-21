@@ -14,6 +14,18 @@ class BlogsController < ApplicationController
     @all_ranks_comment = Blog.find(Comment.group(:blog_id).order('count(blog_id) desc').limit(3).pluck(:blog_id))
     @all_ranks_user_blog = User.find(Blog.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
     
+
+  end
+
+  def rank
+    @blogs = Blog.all
+    @blogs = Blog.search(params).order(created_at: :desc)
+    @most_viewed = Blog.order('impressions_count DESC').take(3)
+    @all_ranks = Blog.find(Like.group(:blog_id).order('count(blog_id) desc').limit(3).pluck(:blog_id))
+    @all_ranks_comment = Blog.find(Comment.group(:blog_id).order('count(blog_id) desc').limit(3).pluck(:blog_id))
+    @all_ranks_user_blog = User.find(Blog.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
+    
+
   end
 
   # GET /blogs/1 or /blogs/1.json

@@ -2,7 +2,7 @@
 
 
     <!-- h1タグでタイトルを表示 -->
-    <h1><%= @blog.title %></h1>
+    <h2><%= @blog.title %></h2>
 
     <!-- 本文を表示 -->
     <%= simple_format(@blog.body) %>
@@ -15,7 +15,7 @@
     <% end %>
    
 
-<h3>いいね件数:</h3> <h3><%= (@blog.likes.count)%></h3>
+いいね件数:<%= (@blog.likes.count)%>
 <%if current_user.already_liked?(@blog)%>
   <%= button_to 'いいねを取り消す', blog_like_path(@blog), class: 'btn btn-success',method: :delete, remote: true %>  
 <% else%>

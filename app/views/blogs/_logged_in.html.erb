@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-
-<%= form_with(path: :blogs_path, local: true, method: :get) do |form| %>
+ログインユーザ:<td><%= @current_user.name %></td>
+<%= form_with(path: :blogs_path, local: true, method: :get,remote:true) do |form| %>
   <label for="search_title"><%= t('activerecord.attributes.blog.title') %></label><%= form.text_field :search_title, value: params[:search_title] %>
   <%= submit_tag t('Search'), name: nil %>
 <% end %>
@@ -33,91 +33,9 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to t('new_blog'), new_blog_path %>
+<%= link_to 'ブログを作成する', new_blog_path %>
+<%= link_to 'ランキングを見る', '/ranks/rank' %>
 <%= link_to "ログアウト", logout_path, method: :delete %>
 
 
 
-
-<h1>ブログ閲覧数ランキング</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>名前</th>
-      <th>閲覧数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @most_viewed.each.with_index(1) do |blog, i| %>
-      <tr>
-        <td><%= "#{i}" %></td>
-        <td><%= blog.title %></td>
-        <td><%= blog.impressions_count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<h1>ブログいいね数ランキング</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>名前</th>
-      <th>いいね数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @all_ranks.each.with_index(1) do |blog, i| %>
-      <tr>
-       <td><%= "#{i}" %></td>
-        <td><%= blog.title %></td>
-        <td><%=blog.likes.count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<table>
-<h1>ブログコメント数ランキング</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>名前</th>
-      <th>コメント数</th>
-    </tr>
-  </thead>
-<tbody>
-    <% @all_ranks_comment.each.with_index(1) do |blog, i| %>
-      <tr>
-       <td><%= "#{i}" %></td>
-        <td><%= blog.title %></td>
-        <td><%=blog.comments.count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h1>ブログ投稿数ランキング</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>ユーザ名</th>
-      <th>投稿数</th>
-    </tr>
-  </thead>
-<tbody>
-    <% @all_ranks_user_blog.each.with_index(1) do |user, i| %>
-      <tr>
-       <td><%= "#{i}" %></td>
-        <td><%= user.name %></td>
-        <td><%=user.blogs.count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

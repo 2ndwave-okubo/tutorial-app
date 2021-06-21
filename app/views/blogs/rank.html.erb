@@ -1,4 +1,5 @@
-<h1>Blogs</h1>
+<h3>ブログ閲覧数ランキング</h3>
+
 <table>
   <thead>
     <tr>
@@ -7,14 +8,78 @@
       <th>閲覧数</th>
     </tr>
   </thead>
- 
   <tbody>
-    <% @most_viewed.each.with_index(1) do |rank, i| %>
+    <% @most_viewed.each.with_index(1) do |blog, i| %>
       <tr>
         <td><%= "#{i}" %></td>
-        <td><%= rank.name %></td>
-        <td><%= rank.impressions_count %></td>
+        <td><%= blog.title %></td>
+        <td><%= blog.impressions_count %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<h3>ブログいいね数ランキング</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>いいね数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_ranks.each.with_index(1) do |blog, i| %>
+      <tr>
+       <td><%= "#{i}" %></td>
+        <td><%= blog.title %></td>
+        <td><%=blog.likes.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table>
+<h3>ブログコメント数ランキング</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>コメント数</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @all_ranks_comment.each.with_index(1) do |blog, i| %>
+      <tr>
+       <td><%= "#{i}" %></td>
+        <td><%= blog.title %></td>
+        <td><%=blog.comments.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>ブログ投稿数ランキング</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>ユーザ名</th>
+      <th>投稿数</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @all_ranks_user_blog.each.with_index(1) do |user, i| %>
+      <tr>
+       <td><%= "#{i}" %></td>
+        <td><%= user.name %></td>
+        <td><%=user.blogs.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('Back'), blogs_path %>
+

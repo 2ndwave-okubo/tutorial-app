@@ -8,10 +8,16 @@
             </ul>
         </div>
     <% end %>
-<%= label_tag 'comment[body]', t('activerecord.attributes.comment.body') %><%= form.text_area :body, row: 3 %>
+
+<%= label_tag 'comment[body]', t('activerecord.attributes.comment.body') %>
+
+<br><%= form.text_area :body, row: 3 %>
+
+
 <div class="field">
 <%= form.hidden_field :blog_id %>
 </div>
+<br>
 <div class="actions">
     <%= form.submit t("labels.comment_submit") %>
 </div>
