@@ -16,9 +16,10 @@ class Blog < ApplicationRecord
     validates :title, presence: true, length: { minimum: 1, maximum: 50}
     validates :body, presence: true, length: { minimum:10, maximum: 5000 }
     validates :user_id, {presence: true}
-    has_many :comments 
-    has_many :likes
+    has_many :comments, :dependent => :destroy 
+    has_many :likes, :dependent => :destroy 
     has_many :liked_users, through: :likes, source: :user
+
     
     
     scope :search, -> (params) do

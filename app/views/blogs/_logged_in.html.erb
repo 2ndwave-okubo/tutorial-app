@@ -78,7 +78,46 @@
       </tr>
     <% end %>
   </tbody>
- 
-  
 </table>
-  
+<table>
+<h1>ブログコメント数ランキング</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>コメント数</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @all_ranks_comment.each.with_index(1) do |blog, i| %>
+      <tr>
+       <td><%= "#{i}" %></td>
+        <td><%= blog.title %></td>
+        <td><%=blog.comments.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>ブログ投稿数ランキング</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>ユーザ名</th>
+      <th>投稿数</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @all_ranks_user_blog.each.with_index(1) do |user, i| %>
+      <tr>
+       <td><%= "#{i}" %></td>
+        <td><%= user.name %></td>
+        <td><%=user.blogs.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
