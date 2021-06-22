@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 ログインユーザ:<td><%= @current_user.name %></td>
-<%= form_with(path: :blogs_path, local: true, method: :get,remote:true) do |form| %>
-  <label for="search_title"><%= t('activerecord.attributes.blog.title') %></label><%= form.text_field :search_title, value: params[:search_title] %>
-  <%= submit_tag t('Search'), name: nil %>
-<% end %>
+<div class="blogs">
+  <%= text_field_tag :title,'', class: 'js-text_field', placeholder: 'タイトル検索' %>
+
+<ul class="js-blogs">
+    <%= render @blogs %><!-- 部分テンプレートを呼び出し-->
+  </ul>
+  
+ 
 
 <table>
   <thead>
@@ -33,8 +37,8 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'ブログを作成する', new_blog_path %>
-<%= link_to 'ランキングを見る', '/ranks/rank' %>
+<%= link_to 'ブログを作成する', new_blog_path %>|
+<%= link_to 'ランキングを見る', '/ranks/rank' %>|
 <%= link_to "ログアウト", logout_path, method: :delete %>
 
 
