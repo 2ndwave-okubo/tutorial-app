@@ -14,6 +14,7 @@
         <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%= blog.impressions_count %></td>
+        <td><%= link_to t('Show'), blog %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,6 +35,7 @@
        <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%=blog.likes.count %></td>
+        <td><%= link_to t('Show'), blog %></td>
       </tr>
     <% end %>
   </tbody>
@@ -55,6 +57,7 @@
        <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%=blog.comments.count %></td>
+        <td><%= link_to t('Show'), blog %></td>
       </tr>
     <% end %>
   </tbody>
@@ -75,6 +78,7 @@
       <tr>
        <td><%= "#{i}" %></td>
         <td><%= user.name %></td>
+        
         <td><%=user.blogs.count %></td>
       </tr>
     <% end %>
