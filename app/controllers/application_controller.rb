@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   
 
+  
+
 private
    # ログイン済みユーザーかどうか確認
     def logged_in_user
