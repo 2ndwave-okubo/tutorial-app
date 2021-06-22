@@ -1,5 +1,11 @@
 ja:
-
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   Show: 記事を見る
   Search: 検索
   Edit: 記事の編集
@@ -15,7 +21,13 @@ ja:
         body: 本文
       comment:
         body: コメント本文
-  labels:
-    comment_submit: コメント投稿
+        first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
+      labels:
+      comment_submit: コメント投稿
   
+      
   

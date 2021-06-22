@@ -1,11 +1,12 @@
 <h3>ブログ閲覧数ランキング</h3>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>順位</th>
       <th>名前</th>
       <th>閲覧数</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -21,12 +22,13 @@
 </table>
 <h3>ブログいいね数ランキング</h3>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>順位</th>
       <th>名前</th>
       <th>いいね数</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -43,12 +45,13 @@
 <table>
 <h3>ブログコメント数ランキング</h3>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>順位</th>
       <th>名前</th>
       <th>コメント数</th>
+      <th></th>
     </tr>
   </thead>
 <tbody>
@@ -65,7 +68,7 @@
 
 <h3>ブログ投稿数ランキング</h3>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>順位</th>
@@ -78,7 +81,6 @@
       <tr>
        <td><%= "#{i}" %></td>
         <td><%= user.name %></td>
-        
         <td><%=user.blogs.count %></td>
       </tr>
     <% end %>

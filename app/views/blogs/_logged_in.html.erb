@@ -2,23 +2,23 @@
 ログインユーザ:<td><%= @current_user.name %></td>
 <div class="blogs">
   <%= text_field_tag :title,'', class: 'js-text_field', placeholder: 'タイトル検索' %>
-
   <ul class="js-blogs">
-    
-   
   </ul>
- 
 <div>
   
  
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      
+      <th>作成日</th>
+      <th>タイトル</th>
+      <th></th> 
+      <th></th> 
     </tr>
-  </thead>
-
+  <thead>
+    
   <tbody>
 
     <% @blogs.each do |blog| %>
@@ -29,8 +29,8 @@
       <td><%= blog.title %></td>
       <td><%= link_to t('Show'), blog %></td>
       <% if blog.user == current_user %>
-        <td><%= link_to t('Edit'), edit_blog_path(blog) %></td>
-        <td><%= link_to t('Destroy'), blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to '記事の編集', edit_blog_path(blog), method: :get %></td>
+        <td><%= button_to '削除', blog, method: :delete, data: { confirm: '本当に削除しますか？' } , method: :get %></td>
       <% else %>
         <td></td>
         <td></td>
@@ -38,10 +38,12 @@
       
       </tr>
     <% end %>
+    
   </tbody>
 </table>
-<%= link_to 'ブログを作成する', new_blog_path %>|
-<%= link_to 'ランキングを見る', '/ranks/rank' %>|
+<%= paginate @blogs %>
+<%= button_to 'ブログ作成', new_blog_path, method: :get %>
+<%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
 <%= link_to "ログアウト", logout_path, method: :delete %>
 
 
