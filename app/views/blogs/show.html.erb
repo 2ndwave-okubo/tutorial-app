@@ -16,19 +16,23 @@
    
 
 いいね件数:<%= (@blog.likes.count)%>
-<%if current_user.already_liked?(@blog)%>
-  <%= button_to 'いいねを取り消す', blog_like_path(@blog), class: 'btn btn-success',method: :delete, remote: true %>  
-<% else%>
-  <%= button_to 'いいね', blog_likes_path(@blog),class: 'btn btn-success', remote: true%>
+<%if @current_user.nil? == true%>
+<%else%>
+  <%if current_user.already_liked?(@blog)%>
+      <%= button_to 'いいねを取り消す', blog_like_path(@blog), class: 'btn btn-success',method: :delete, remote: true %>  
+  <% else%>
+    <%= button_to 'いいね', blog_likes_path(@blog),class: 'btn btn-success', remote: true%>
+  <%end%>
 <%end%>
-
   
-    <strong>閲覧数:</strong>
-    <%= @blog.impressions_count %>
-    <br>
-    
-    <%= link_to t('Back'), blogs_path %>|
-    <%= link_to 'ランキングを見る', '/ranks/rank' %>|
-    <%= link_to "ログアウト", logout_path, method: :delete %>
-  
+<strong>閲覧数:</strong>
+<%= @blog.impressions_count %>
+<br>
+<%= link_to t('Back'), blogs_path %>|
+<%= link_to 'ランキングを見る', '/ranks/rank' %>|
+<%if @current_user.nil? == true%>
+  <%= link_to "ログイン", login_path %>
+<%else%>
+  <%= link_to "ログアウト", logout_path, method: :delete %>
+<%end%>
   

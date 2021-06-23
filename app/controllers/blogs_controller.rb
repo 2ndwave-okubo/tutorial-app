@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy ]
-  before_action :logged_in_user, only:[:edit, :update, :destroy]
+  before_action :logged_in_user, only:[:edit, :update, :destroy,:new]
+  before_action :baria_user, only: [:edit, :destroy, :update]
   
   impressionist :actions=> [:show]
 
@@ -8,7 +9,7 @@ class BlogsController < ApplicationController
   # GET /blogs or /blogs.json
   def index
     @blogs = Blog.all.page(params[:page]).per(5)
-    
+   
   end
 
   def rank
@@ -94,12 +95,11 @@ class BlogsController < ApplicationController
     def set_blog
       @blog = Blog.find(params[:id])
     end
-    
-    
 
-    
-    
-    
-
+    def baria_user
+      unless Blog.find(params[:id]).user.id.to_i == current_user.id
+          redirect_to blogs_path(current_user)
+      end
+    end
     
 end
