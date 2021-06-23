@@ -6,14 +6,15 @@
 
     <!-- 本文を表示 -->
     <%= simple_format(@blog.body) %>
-    
+  <%if @current_user.nil? == true%>
     <%= tag.div id: :comments_area do %>
         <%= render partial: "comments/index", locals: { comments: @blog.comments } %>
     <% end %>
+  <%else%>  
     <%= tag.div id: :comment_form do %>
         <%= render partial: "comments/form", locals: { comment: @blog.comments.build } %>
     <% end %>
-   
+  <%end%>
 
 いいね件数:<%= (@blog.likes.count)%>
 <%if @current_user.nil? == true%>
@@ -21,7 +22,7 @@
   <%if current_user.already_liked?(@blog)%>
       <%= button_to 'いいねを取り消す', blog_like_path(@blog), class: 'btn btn-success',method: :delete, remote: true %>  
   <% else%>
-    <%= button_to 'いいね', blog_likes_path(@blog),class: 'btn btn-success', remote: true%>
+      <%= button_to 'いいね', blog_likes_path(@blog),class: 'btn btn-success', remote: true%>
   <%end%>
 <%end%>
   

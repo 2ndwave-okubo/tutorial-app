@@ -17,10 +17,13 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     
   end
+  get  '/signup', to: 'users#new'
+  post '/signup',  to: 'users#create'
+  resources :users
 
   
 
-  resources :blogs # このコードより上に追加する(※補足説明へ)
+  resources :blogs
   
   
 end

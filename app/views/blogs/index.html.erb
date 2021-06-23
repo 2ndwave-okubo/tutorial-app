@@ -48,10 +48,12 @@
 <%= paginate @blogs %>
 <%if @current_user.nil? == true%>
   <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
-  <%= link_to "ログイン", login_path%>
+  <%= button_to 'ユーザ登録', signup_path, method: :get%>
+  <%= button_to 'ログイン', login_path %>
 <%else%>
   <%= button_to 'ブログ作成', new_blog_path, method: :get %>
   <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
-  <%= link_to "ログアウト", logout_path, method: :delete %>
+  <%= button_to 'ログアウト', logout_path, method: :delete %>
+  
 <%end%>
 

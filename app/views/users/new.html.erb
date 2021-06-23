@@ -1,0 +1,36 @@
+<% provide(:title, 'Sign up') %>
+<h1>ユーザ登録フォーム</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user, url: signup_path) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    　<br>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+      <br>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+     <br>
+      <%= f.label :password_confirmation, "password" %>
+      <%= f.password_field :password_confirmation , placeholder: 'もう一度入力してください'%>
+      <br>
+      <%= f.submit "ユーザ登録をする", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<%= link_to "ログイン", login_path%>｜
+<%= link_to t('Back'), blogs_path %>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@user.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
