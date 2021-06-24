@@ -98,7 +98,7 @@ class BlogsController < ApplicationController
 
     def baria_user
       unless Blog.find(params[:id]).user.id.to_i == current_user.id
-          redirect_to blogs_path(current_user)
+          redirect_to blogs_path
       end
     end
     

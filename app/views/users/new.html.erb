@@ -1,3 +1,4 @@
+<p id="alert"><%= alert %></p>
 <% provide(:title, 'Sign up') %>
 <h1>ユーザ登録フォーム</h1>
 
@@ -20,8 +21,9 @@
     <% end %>
   </div>
 </div>
-<%= link_to "ログイン", login_path%>｜
-<%= link_to t('Back'), blogs_path %>
+<%= button_to 'ログイン', login_path, method: :get%>
+<%= button_to t('Back'), blogs_path, method: :get%>
+
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">

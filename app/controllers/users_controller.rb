@@ -9,13 +9,22 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(user_params)
-    if @user.save
-      # 保存の成功をここで扱う。
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to root_url
+    @user_search = User.find_by(email: @user.email)
+    if @user_search.nil? == true
+      if @user.save
+        # 保存の成功をここで扱う。
+        flash.now[:alert] = 'ユーザ登録が完了しました。'
+        render 'sessions/new'
+      else
+        render 'new'
+      end
     else
+      flash.now[:alert] = 'メールアドレスが既に使用されています。'
       render 'new'
+
+      
     end
+    
   end
 
   private
