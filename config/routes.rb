@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get 'ranks/rank', to: 'blogs#rank'
+  get'blogs/deleted' ,to: 'blogs#deleted'
+  post '/restore',to:'blogs#restore'
+  post '/delete',to:'blogs#delete'
   namespace :blogs do 
     resources :searches, only: :index, defaults: { format: :json }
   end
@@ -19,7 +22,7 @@ Rails.application.routes.draw do
   end
   get  '/signup', to: 'users#new'
   post '/signup',  to: 'users#create'
-  
+
   resources :users
 
   

@@ -1,3 +1,4 @@
+<div class="index">
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert%></p>
 <h3>記事一覧</h3>
@@ -35,7 +36,7 @@
       <td><%= link_to t('Show'), blog %></td>
       <% if blog.user == current_user %>
         <td><%= button_to '記事の編集', edit_blog_path(blog), method: :get %></td>
-        <td><%= button_to '削除', blog, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <td><%= button_to 'ゴミ箱へ', blog, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
       <% else %>
         <td></td>
         <td></td>
@@ -54,7 +55,9 @@
 <%else%>
   <%= button_to 'ブログ作成', new_blog_path, method: :get %>
   <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
+  <%= button_to 'ゴミ箱を見る', '/blogs/deleted', method: :get %>
   <%= button_to 'ログアウト', logout_path, method: :delete %>
   
 <%end%>
+</div>
 

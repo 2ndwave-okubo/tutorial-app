@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy ]
-  before_action :logged_in_user, only:[:edit, :update, :destroy,:new]
+  before_action :set_blog, only: %i[ show edit update destroy  ]
+  before_action :logged_in_user, only:[:edit, :update, :destroy,:new,:deleted]
   before_action :baria_user, only: [:edit, :destroy, :update]
   
   impressionist :actions=> [:show]
@@ -81,6 +81,7 @@ class BlogsController < ApplicationController
 
   # DELETE /blogs/1 or /blogs/1.json
   def destroy
+    
     @blog.destroy
     respond_to do |format|
       format.html { redirect_to blogs_url, notice: "Blog was successfully destroyed." }
@@ -88,12 +89,38 @@ class BlogsController < ApplicationController
     end
   end
 
+  def restore
+    @id = params[:id]
+    Blog.restore(@id)
+    respond_to do |format|
+      format.html { redirect_to blogs_url, notice: "ブログを復元しました" }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete
+    @id = params[:id]
+    @blog=Blog.only_deleted.find_by(@id)
+    binding.pry
+    Blog.find_by(@id).really_destroy!
+    respond_to do |format|
+      format.html { redirect_to blogs_url, notice: "ブログを削除しました" }
+      format.json { head :no_content }
+    end
+  end
+
+
+  def deleted
+    @blogs = Blog.only_deleted.where(user_id:current_user.id)
+  end
+
   
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
-      @blog = Blog.find(params[:id])
+      
+      @blog = Blog.with_deleted.find(params[:id])
     end
 
     def baria_user
@@ -101,5 +128,7 @@ class BlogsController < ApplicationController
           redirect_to blogs_path
       end
     end
+
+  
     
 end

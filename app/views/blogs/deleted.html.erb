@@ -1,0 +1,35 @@
+<h3>ゴミ箱</h3>
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th>作成日</th>
+      <th>タイトル</th>
+      <th></th> 
+      <th></th> 
+    </tr>
+  <thead>
+    
+  <tbody>
+
+    <% @blogs.each do |blog| %>
+      <tr>
+      <!-- 作成日を追加 -->
+      <td><%= blog.created_at.strftime("%Y/%m/%d") %></td>
+      <!-- タイトルを追加 -->
+      <td><%= blog.title %></td>
+      <td><%= link_to t('Show'), blog %></td>
+      <% if blog.user == current_user %>
+        <td><%= button_to '復元', restore_path(id:blog.id), method: :post, data: { confirm: '本当に復元しますか？' } %></td>
+        
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
+      
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+<%= button_to t('Back'), blogs_path, method: :get%>
