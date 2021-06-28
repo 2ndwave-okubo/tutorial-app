@@ -2,15 +2,17 @@
 
 <div class="mx-auto" style="width: 650px;">
     <!-- h1タグでタイトルを表示 -->
-    <h2><%= @blog.title %></h2>
+    <h1><%= @blog.title %></h1>
 
     <!-- 本文を表示 -->
-    <%= simple_format(@blog.body) %>
+    <h3><%= @blog.body %></h3>
+    <% if @blog.user == @current_user %>  
+      <%= button_to '記事の編集', edit_blog_path, method: :get,class: "btn btn-primary" %>
+    <%end%>
     <%= tag.div id: :comments_area do %>
         <%= render partial: "comments/index", locals: { comments: @blog.comments } %>
     <% end %>
-
-  
+    
   <%if @current_user.nil? == true %>
     
   <%else%>  
@@ -37,10 +39,10 @@
     <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
     <td><%= button_to 'ランキングへ', '/ranks/rank', method: :get,class: "btn btn-primary" %></td>
   <%if @current_user.nil? == true%>
-    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
   <%else%>
-    <td><%= button_to 'ログアウト', logout_path, method: :delete,class: "btn btn-primary",data: { confirm: 'ログアウトしますか？' } %></td>
+    <td><%= button_to 'ゴミ箱を見る', '/blogs/deleted', method: :get,class: "btn btn-primary" %></td>
   <%end%>
 </tr>
 </table>
 </div>
+<%= render 'logged_in_user', blog: @blog %>

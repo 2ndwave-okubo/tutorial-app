@@ -26,7 +26,6 @@
 <br>
 <table>
   <tr>
-    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
     <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
   </tr>
 </table>
@@ -43,3 +42,4 @@
   </div>
 <% end %>
 </div>
+<%= render 'blogs/logged_in_user', blog: @blog %>
