@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy  ]
-  before_action :logged_in_user, only:[:edit, :update, :destroy,:new,:deleted]
-  before_action :baria_user, only: [:edit, :destroy, :update]
+  before_action :logged_in_user, only:[:edit, :update, :destroy,:new,:deleted,:delete,:restore]
+  before_action :baria_user, only: [:edit, :destroy, :update,:new,:deleted,:delete,:restore]
   
   impressionist :actions=> [:show]
 
@@ -48,7 +48,7 @@ class BlogsController < ApplicationController
     respond_to do |format|
       if @blog.save
         
-        format.html { redirect_to @blog, notice: "Blog was successfully created." }
+        format.html { redirect_to @blog, notice: "ブログを作成しました" }
         format.json { render :show, status: :created, location: @blog }
         
       else
@@ -84,7 +84,7 @@ class BlogsController < ApplicationController
     
     @blog.destroy
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: "Blog was successfully destroyed." }
+      format.html { redirect_to blogs_url, notice: "ゴミ箱へ移動しました。." }
       format.json { head :no_content }
     end
   end
@@ -100,9 +100,8 @@ class BlogsController < ApplicationController
 
   def delete
     @id = params[:id]
-    @blog=Blog.only_deleted.find_by(@id)
-    binding.pry
-    Blog.find_by(@id).really_destroy!
+    @blog=Blog.only_deleted.find_by(id:@id)
+    @blog.really_destroy!
     respond_to do |format|
       format.html { redirect_to blogs_url, notice: "ブログを削除しました" }
       format.json { head :no_content }
@@ -124,7 +123,7 @@ class BlogsController < ApplicationController
     end
 
     def baria_user
-      unless Blog.find(params[:id]).user.id.to_i == current_user.id
+      unless Blog.with_deleted.find_by(params[:id]).user.id.to_i == current_user.id
           redirect_to blogs_path
       end
     end

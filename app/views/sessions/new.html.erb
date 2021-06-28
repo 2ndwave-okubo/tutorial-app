@@ -1,12 +1,18 @@
-<p id="alert"><%= alert %></p>
+<p id="notice "><%= notice  %></p>
+<div class="mx-auto" style="width: 650px;">
 <h1>ログイン</h1>
 <%= form_for(:session, url: login_path) do |f| %>
-  <%= f.label :email %>
+  <%= f.label :メールアドレス %>
   <%= f.email_field :email %><br>
-  <%= f.label :password %>
+  <%= f.label :パスワード %>
   <%= f.password_field :password %><br>
   <%= f.submit "ログインする" ,class: "btn btn-primary"%>
 <% end %>
-<%= button_to t('Back'), blogs_path, method: :get%>
-<%= button_to 'ユーザ登録', signup_path, method: :get%>
-
+<br>
+<table>
+  <tr>
+    <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
+    <td><%= button_to 'ユーザ登録', signup_path, method: :get,class: "btn btn-primary"%></td>
+  </tr>
+</table>
+</div>

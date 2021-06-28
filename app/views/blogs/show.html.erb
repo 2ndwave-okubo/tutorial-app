@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-
+<div class="mx-auto" style="width: 650px;">
     <!-- h1タグでタイトルを表示 -->
     <h2><%= @blog.title %></h2>
 
@@ -11,7 +11,7 @@
     <% end %>
 
   
-    <%if @current_user.nil? == true%>
+  <%if @current_user.nil? == true %>
     
   <%else%>  
     <%= tag.div id: :comment_form do %>
@@ -32,11 +32,15 @@
 <strong>閲覧数:</strong>
 <%= @blog.impressions_count %>
 <br>
-<%= button_to t('Back'), blogs_path, method: :get%>
- <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
-<%if @current_user.nil? == true%>
-  <%= button_to 'ログイン', login_path, method: :get%>
-<%else%>
-  <%= button_to 'ログアウト', logout_path, method: :delete %>
-<%end%>
-  
+<table>
+  <tr>
+    <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
+    <td><%= button_to 'ランキングへ', '/ranks/rank', method: :get,class: "btn btn-primary" %></td>
+  <%if @current_user.nil? == true%>
+    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
+  <%else%>
+    <td><%= button_to 'ログアウト', logout_path, method: :delete,class: "btn btn-primary",data: { confirm: 'ログアウトしますか？' } %></td>
+  <%end%>
+</tr>
+</table>
+</div>

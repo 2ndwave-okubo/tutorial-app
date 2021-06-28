@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user_search.nil? == true
       if @user.save
         # 保存の成功をここで扱う。
-        flash.now[:alert] = 'ユーザ登録が完了しました。'
+        flash.now[:notice] = 'ユーザ登録が完了しました。'
         render 'sessions/new'
       else
         render 'new'

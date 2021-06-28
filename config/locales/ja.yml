@@ -12,6 +12,7 @@ ja:
   Destroy: 削除
   Back: 一覧へ戻る
   New Blog: 記事の作成
+  password: パスワード
   activerecord:
     models:
       blog: 記事
@@ -28,6 +29,8 @@ ja:
       truncate: "..."
       labels:
       comment_submit: コメント投稿
-  
+      user:
+        password: パスワード
+        password confirmation: 確認のパスワード
       
   

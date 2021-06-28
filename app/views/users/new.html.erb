@@ -1,29 +1,35 @@
 <p id="alert"><%= alert %></p>
+<div class="mx-auto" style="width: 650px;">
 <% provide(:title, 'Sign up') %>
 <h1>ユーザ登録フォーム</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@user, url: signup_path) do |f| %>
-      <%= f.label :name %>
+      <%= f.label :名前 %>
       <%= f.text_field :name %>
     　<br>
-      <%= f.label :email %>
+      <%= f.label :メールアドレス %>
       <%= f.email_field :email %>
       <br>
       <%= f.label :password %>
       <%= f.password_field :password %>
      <br>
-      <%= f.label :password_confirmation, "password" %>
-      <%= f.password_field :password_confirmation , placeholder: 'もう一度入力してください'%>
+     確認のためもう一度入力してください。<br>
+      <%= f.label :password_confirmation, "パスワード" %>
+      <%= f.password_field :password_confirmation %>
       <br>
       <%= f.submit "ユーザ登録をする", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
-<%= button_to 'ログイン', login_path, method: :get%>
-<%= button_to t('Back'), blogs_path, method: :get%>
-
+<br>
+<table>
+  <tr>
+    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
+    <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
+  </tr>
+</table>
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
@@ -36,3 +42,4 @@
     </ul>
   </div>
 <% end %>
+</div>

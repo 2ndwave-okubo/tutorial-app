@@ -1,6 +1,7 @@
-<div class="index">
+
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert%></p>
+<div class="mx-auto" style="width: 650px;">
 <h3>記事一覧</h3>
 <%if @current_user.nil? == true%>
 <%else%>
@@ -33,10 +34,11 @@
       <td><%= blog.created_at.strftime("%Y/%m/%d") %></td>
       <!-- タイトルを追加 -->
       <td><%= blog.title %></td>
-      <td><%= link_to t('Show'), blog %></td>
+      <td><%= button_to '記事を見る',blog, method: :get,class: "btn btn-primary" %></td>
+      
       <% if blog.user == current_user %>
-        <td><%= button_to '記事の編集', edit_blog_path(blog), method: :get %></td>
-        <td><%= button_to 'ゴミ箱へ', blog, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <td><%= button_to '記事の編集', edit_blog_path(blog), method: :get,class: "btn btn-primary" %></td>
+        <td><%= button_to 'ゴミ箱へ', blog,class: "btn btn-primary", method: :delete, data: { confirm: 'ゴミ箱に移動しますか？※  ゴミ箱に移動すると一覧に表示されなくなります。' } %></td>
       <% else %>
         <td></td>
         <td></td>
@@ -49,15 +51,22 @@
 </table>
 <%= paginate @blogs %>
 <%if @current_user.nil? == true%>
-  <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
-  <%= button_to 'ユーザ登録', signup_path, method: :get%>
-  <%= button_to 'ログイン', login_path, method: :get%>
+<table>
+  <tr>
+    <td><%= button_to 'ランキングへ', '/ranks/rank', method: :get,class: "btn btn-primary" %></td>
+    <td><%= button_to 'ユーザ登録', signup_path, method: :get,class: "btn btn-primary"%></td>
+    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
+  </tr>
+</table>
 <%else%>
-  <%= button_to 'ブログ作成', new_blog_path, method: :get %>
-  <%= button_to 'ランキングへ', '/ranks/rank', method: :get %>
-  <%= button_to 'ゴミ箱を見る', '/blogs/deleted', method: :get %>
-  <%= button_to 'ログアウト', logout_path, method: :delete %>
-  
+  <table>
+  <tr>
+    <td><%= button_to 'ブログ作成', new_blog_path, method: :get,class: "btn btn-primary" %></td>
+    <td><%= button_to 'ランキングへ', '/ranks/rank', method: :get,class: "btn btn-primary" %></td>
+    <td><%= button_to 'ゴミ箱を見る', '/blogs/deleted', method: :get,class: "btn btn-primary" %></td>
+    <td><%= button_to 'ログアウト', logout_path, method: :delete,class: "btn btn-primary",data: { confirm: 'ログアウトしますか？' } %></td>
+  </tr>
+  </table>
 <%end%>
 </div>
 

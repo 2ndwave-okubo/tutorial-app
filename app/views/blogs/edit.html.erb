@@ -1,7 +1,12 @@
+<div class="mx-auto" style="width: 650px;">
 <h1>記事の編集</h1>
 
 <%= render 'form', blog: @blog %>
 
-
-<%= button_to t('Show'), @blog, method: :get%>
-<%= button_to t('Back'), blogs_path, method: :get%>
+<table>
+    <tr>
+        <td><%= button_to t('Show'), @blog, method: :get,class: "btn btn-primary"%></td>
+        <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
+    </tr>
+</table>
+</div>

@@ -1,3 +1,4 @@
+<div class="mx-auto" style="width: 650px;">
 <h3>ブログ閲覧数ランキング</h3>
 
 <table class="table">
@@ -15,7 +16,7 @@
         <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%= blog.impressions_count %></td>
-        <td><%= link_to t('Show'), blog %></td>
+        <td><%= button_to '記事を見る',blog, method: :get,class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -37,7 +38,7 @@
        <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%=blog.likes.count %></td>
-        <td><%= link_to t('Show'), blog %></td>
+        <td><%= button_to '記事を見る',blog, method: :get,class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -60,7 +61,7 @@
        <td><%= "#{i}" %></td>
         <td><%= blog.title %></td>
         <td><%=blog.comments.count %></td>
-        <td><%= link_to t('Show'), blog %></td>
+        <td><%= button_to '記事を見る',blog, method: :get,class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -87,5 +88,14 @@
   </tbody>
 </table>
 
-<%= button_to t('Back'), blogs_path, method: :get%>
-
+<table>
+  <tr>
+    <td><%= button_to t('Back'), blogs_path, method: :get,class: "btn btn-primary"%></td>
+  <%if @current_user.nil? == true%>
+    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
+  <%else%>
+    <td><%= button_to 'ログアウト', logout_path, method: :delete,class: "btn btn-primary",data: { confirm: 'ログアウトしますか？' } %></td>
+  <%end%>
+</tr>
+</table>
+</div>
