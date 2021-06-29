@@ -6,13 +6,14 @@
 
     <!-- 本文を表示 -->
     <h3><%= @blog.body %></h3>
-    <% if @blog.user == @current_user %>  
+    <% if @blog.user == @current_user %>  <br>
       <%= button_to '記事の編集', edit_blog_path, method: :get,class: "btn btn-primary" %>
     <%end%>
+    <br>
     <%= tag.div id: :comments_area do %>
         <%= render partial: "comments/index", locals: { comments: @blog.comments } %>
     <% end %>
-    
+   
   <%if @current_user.nil? == true %>
     
   <%else%>  

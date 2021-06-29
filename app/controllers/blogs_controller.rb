@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy  ]
   before_action :logged_in_user, only:[:edit, :update, :destroy,:new,:deleted,:delete,:restore]
-  before_action :baria_user, only: [:edit, :destroy, :update,:new,:deleted,:delete,:restore]
+  before_action :baria_user, only: [:edit, :destroy, :update,:delete,:restore]
   
   impressionist :actions=> [:show]
 
@@ -123,7 +123,9 @@ class BlogsController < ApplicationController
     end
 
     def baria_user
-      unless Blog.with_deleted.find_by(params[:id]).user.id.to_i == current_user.id
+      
+      unless Blog.with_deleted.find(params[:id]).user.id.to_i == current_user.id
+        
           redirect_to blogs_path
       end
     end

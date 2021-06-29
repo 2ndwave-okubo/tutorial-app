@@ -3,6 +3,7 @@ class Blogs::SearchesController < ApplicationController
     @blogs = Blog.where('title LIKE(?)', "%#{params[:title]}%")
     @blogs_value = "%#{params[:title]}%"
     if @blogs_value == "%%"
+      
     else 
       respond_to do |format|
         format.html { redirect_to :root }

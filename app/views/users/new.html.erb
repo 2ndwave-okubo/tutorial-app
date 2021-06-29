@@ -42,4 +42,9 @@
   </div>
 <% end %>
 </div>
-<%= render 'blogs/logged_in_user', blog: @blog %>
+<table class="loginout">
+  <tr>
+    <td><%= button_to 'ログイン', login_path, method: :get,class: "btn btn-primary"%></td>
+  
+  </tr>
+</table>
