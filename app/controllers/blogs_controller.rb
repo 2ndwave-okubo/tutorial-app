@@ -66,7 +66,6 @@ class BlogsController < ApplicationController
     params.fetch(:blog, {}).permit(:title, :body)
   end
   
-  # PATCH/PUT /blogs/1 or /blogs/1.json
   def update
     respond_to do |format|
       if @blog.update(blog_params)
@@ -79,7 +78,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  # DELETE /blogs/1 or /blogs/1.json
   def destroy
     
     @blog.destroy
@@ -108,12 +106,9 @@ class BlogsController < ApplicationController
     end
   end
 
-
   def deleted
     @blogs = Blog.only_deleted.where(user_id:current_user.id)
   end
-
-  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -129,7 +124,4 @@ class BlogsController < ApplicationController
           redirect_to blogs_path
       end
     end
-
-  
-    
 end

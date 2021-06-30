@@ -1,3 +1,25 @@
 <p id="notice"><%= notice %></p>
 <p>ログインをしてください。</p>
 <%= button_to t('Back'), blogs_path%>
+
+
+
+        <h3>ブログ投稿数ランキング</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>ユーザ名</th>
+              <th>投稿数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @all_ranks_user_blog.each.with_index(1) do |user, i| %>
+              <tr>
+                <td><%= "#{i}" %></td>
+                <td><%= user.name %></td>
+                <td><%=user.blogs.count %></td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
